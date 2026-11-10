@@ -3,6 +3,8 @@ const http = require('http');
 const server = http.createServer((req,res)=>{
     let url = req.url;
 
+    res.setHeader("Content-Type","text/html")
+
     if(url === '/'){
         res.end('<h1>Hello, World!</h1>');
     }
