@@ -13,7 +13,7 @@ const getProductById =(req,res)=>{
 const addProduct = (req,res)=>{
     const product = req.body;
     console.log("Product recieved from client: ",product)
-    res.send(product);
+    res.json({value : product.productName});
 }
 
 module.exports = {
