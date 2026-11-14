@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./utils/db-connection')
 const studentRoutes = require('./routes/studentRoutes')
+const courseRoutes = require('./routes/courseRoutes')
 
 // const studentModel = require('./models/student')
 
@@ -11,6 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/students',studentRoutes)
+app.use('/courses',courseRoutes)
 
 
 app.get('/', (req, res) => {
