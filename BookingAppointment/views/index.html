@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookEase | Appointment Booking</title>
+    <link rel="stylesheet" href="/css/style.css">
+    
+</head>
+<body>
+
+    <h1>Booking Appointment App</h1>
+
+    <form onsubmit="handleSubmit(event)">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"
+               placeholder="Enter username" required>
+        <br><br>
+
+        <label for="phone">Phone Number:</label><br>
+        <input type="tel" id="phone" name="phone"
+               placeholder="Enter phone number"
+               pattern="[0-9]{10}" required>
+        <br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"
+               placeholder="Enter email" required>
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <ul></ul>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/index.js" defer></script>
+</body>
+</html>
