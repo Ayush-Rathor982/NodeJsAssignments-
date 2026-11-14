@@ -1,50 +1,76 @@
 const db = require('../utils/db-connection')
+const Users = require('../models/Users')
 
-const getUsers = (req,res) => {
+const getUsers = async (req,res) => {
 
-    const findQuery = `select * from Users`
+    try {
+        const users = await Users.findAll();
 
-    db.execute(findQuery,[],(err,result)=>{
-        if(err){
-            console.log(err);
-            res.status(500).send(err.message);
-            return
-        }
-
-        if(result.affectedRows===0){
+        if(users.length === 0){
             res.status(404).send("users not found");
-            return ;
         }
+        res.status(200).send(users);
+        
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 
-        res.status(200).send(result);
-    })
+    // const findQuery = `select * from Users`
+
+    // db.execute(findQuery,[],(err,result)=>{
+    //     if(err){
+    //         console.log(err);
+    //         res.status(500).send(err.message);
+    //         return
+    //     }
+
+    //     if(result.affectedRows===0){
+    //         res.status(404).send("users not found");
+    //         return ;
+    //     }
+
+    //     res.status(200).send(result);
+    // })
 }
 
 
 
-const addUsers = (req,res) => {
+const addUsers = async(req,res) => {
 
-    const {name, email} = req.body
+    try {
 
-    console.log("data :",name, email)
+        const {name, email} = req.body
+
+        console.log("data :",name, email)
+
+        const user = await Users.create({
+            name : name,
+            email : email
+        })
+
+        res.status(200).send('user added: ',user);
+        
+    } catch (error) {
+        res.status(500).send(err.message);
+    }
 
     const insertQuery = `insert into Users(name, email) values(?,?)`
 
-    db.execute(insertQuery,[name,email],(err,result)=>{
-        if(err){
-            console.log(err);
-            res.status(500).send(err.message);
-            return
-        }
+    // db.execute(insertQuery,[name,email],(err,result)=>{
+    //     if(err){
+    //         console.log(err);
+    //         res.status(500).send(err.message);
+    //         return
+    //     }
 
-        if(result.affectedRows===0){
-            res.status(404).send("user not found");
-            return ;
-        }
+    //     if(result.affectedRows===0){
+    //         res.status(404).send("user not found");
+    //         return ;
+    //     }
 
 
-        res.status(200).send(result);
-    })
+    //     res.status(200).send(result);
+    // })
 }
 
 
